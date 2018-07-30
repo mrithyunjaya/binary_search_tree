@@ -95,15 +95,37 @@ class BinarySearchTree(object):
                     temp1.parent.right_child = None
                     print "value deleted", val
                 temp1.parent = None
+
         else:
             print "no data found to delete"
 
-    def print_node(self):
+    def fill_tree(self, number_of_elements, range_of_elements):
+        from random import randint
         if self.root is None:
-            return False
+            self.insert(randint(0, range_of_elements))
+            number_of_elements = number_of_elements - 1
+        for _ in range(0, number_of_elements):
+            self.insert(randint(0, range_of_elements))
+
+    def print_tree(self):
+        if self.root is not None:
+            return self._print_tree(self.root)
+        else:
+            print " no data in tree exists"
+            return 0
+
+    def _print_tree(self, current_node):
+        if current_node is not None:
+            self._print_tree(current_node.left_child)
+            print current_node.value
+            self._print_tree(current_node.right_child)
 
 
 if __name__ == "__main__":
+    newTree = BinarySearchTree()
+    newTree.fill_tree(10, 10)
+    newTree.search(3)
+    #newTree.print_tree()
     BST = BinarySearchTree()
 
     BST.insert(10)
@@ -112,6 +134,7 @@ if __name__ == "__main__":
     BST.insert(7)
     BST.insert(5)
     BST.insert(9)
+    BST.print_tree()
     BST.delete(5)
     BST.search(5)
     BST.delete(9)
@@ -120,3 +143,6 @@ if __name__ == "__main__":
     BST.search(10)
     BST.delete(12)
     BST.search(12)
+    BST.print_tree()
+    
+
